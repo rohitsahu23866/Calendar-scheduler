@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* Add this to your global CSS or Tailwind configuration */
+@media (max-width: 640px) {
+  .calendar-cell {
+    padding: 0.5rem;
+    height: 16rem;
+  }
+  
+  .calendar-header {
+    font-size: 1.25rem;
+  }
+
+  .calendar-day {
+    font-size: 0.75rem;
+  }
+
+  .event-title {
+    font-size: 0.75rem;
+  }
+}
+
+/* Add to your global CSS */
+@media (hover: hover) {
+  .interactive:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Light overlay on hover */
+  }
+}
+
