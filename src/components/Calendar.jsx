@@ -5,7 +5,7 @@ import { EventContext } from '../contexts/EventContext';
 import EventForm from './EventForm';
 
 const Calendar = () => {
-  const { events, setEvents, deleteEvent } = useContext(EventContext); // Ensure `setEvents` and `deleteEvent` are in the context
+  const { events, setEvents, deleteEvent } = useContext(EventContext);
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [showForm, setShowForm] = useState(false);
@@ -19,15 +19,19 @@ const Calendar = () => {
   const renderHeader = () => {
     const dateFormat = 'MMMM yyyy';
     return (
-      <div className="flex justify-between items-center py-2">
-        <button onClick={prevMonth} className="text-blue-600 hover:text-blue-800">&lt;</button>
-        <span className="text-lg font-semibold text-gray-700 hover:text-white border border-gray-300 rounded-lg px-4 py-2 shadow-sm bg-white hover:bg-gray-800 hover:scale-105 transition-transform duration-300 ease-in-out">
+      <div className="flex justify-between items-center py-4">
+        <button onClick={prevMonth} className="text-blue-600 hover:text-blue-800 transition-colors">
+          &lt;
+        </button>
+        <span className="text-lg font-semibold text-gray-700 px-4 py-2 rounded-lg shadow-md bg-white">
           {format(currentMonth, dateFormat)}
         </span>
-        <button onClick={nextMonth} className="text-blue-600 hover:text-blue-800">&gt;</button>
+        <button onClick={nextMonth} className="text-blue-600 hover:text-blue-800 transition-colors">
+          &gt;
+        </button>
       </div>
     );
-  }; 
+  };
 
   const renderDays = () => {
     const days = [];
@@ -40,7 +44,7 @@ const Calendar = () => {
         </div>
       );
     }
-    return <div className="grid grid-cols-7">{days}</div>;
+    return <div className="grid grid-cols-7 gap-1">{days}</div>;
   };
 
   const renderCells = () => {
@@ -64,18 +68,18 @@ const Calendar = () => {
         days.push(
           <div
             key={day}
-            className={`p-2 h-24 border border-gray-200 ${
-              isSameDay(day, new Date()) ? 'bg-blue-300' : 'hover:bg-gray-200 hover:scale-105 interactive'
+            className={`p-4 h-32 border border-gray-200 rounded-lg transition-transform duration-300 ease-in-out hover:scale-105 ${
+              isSameDay(day, new Date()) ? 'bg-blue-100 border-blue-300' : 'hover:bg-gray-50'
             }`}
             onClick={() => handleDayClick(cloneDay)}
           >
-            <span className="text-sm">{formattedDate}</span>
+            <span className="text-sm font-medium text-gray-800">{formattedDate}</span>
             <div>
               {dayEvents.map((event) => (
                 <div
                   key={event.id}
-                  className={`p-1 rounded mb-1 text-xs ${
-                    event.category === 'Work' ? 'bg-yellow-300' : 'bg-green-300'
+                  className={`p-1 rounded mb-1 text-xs text-white ${
+                    event.category === 'Work' ? 'bg-yellow-500' : 'bg-green-500'
                   }`}
                   onClick={(e) => handleEventClick(event.id, e)}
                 >
@@ -136,15 +140,18 @@ const Calendar = () => {
   };
 
   return (
-    <div className="bg-white border shadow rounded-lg p-4 md:p-6">
+    <div className="bg-white border rounded-lg shadow-md p-4 md:p-6">
       <div className="flex flex-col md:flex-row items-center mb-4">
-        <button onClick={() => handleDayClick(new Date())} className="bg-blue-500 hover:bg-blue-300 hover:text-grey-200 text-white px-4 py-2 rounded mr-4 mb-2 md:mb-0">
+        <button
+          onClick={() => handleDayClick(new Date())}
+          className="bg-blue-500 hover:bg-blue-400 text-white px-4 py-2 rounded-lg mb-2 md:mb-0 transition-colors"
+        >
           Add Event
         </button>
         <select
           value={filter}
           onChange={handleFilterChange}
-          className="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="p-2 border rounded-lg ml-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
         >
           <option value="All">All Categories</option>
           <option value="Work">Work</option>

@@ -16,17 +16,25 @@ const EventFilter = () => {
   };
 
   return (
-    <div className="p-4">
-      <select value={category} onChange={(e) => filterEvents(e.target.value)} className="w-full p-2 border rounded">
-        <option value="All">All</option>
-        <option value="Work">Work</option>
-        <option value="Personal">Personal</option>
-      </select>
-      <div className="grid grid-cols-7 gap-4 p-4 mt-4">
+    <div className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto">
+      <div className="mb-4">
+        <label htmlFor="category" className="block text-gray-700 text-sm font-medium mb-2">Filter by Category:</label>
+        <select
+          id="category"
+          value={category}
+          onChange={(e) => filterEvents(e.target.value)}
+          className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+        >
+          <option value="All">All</option>
+          <option value="Work">Work</option>
+          <option value="Personal">Personal</option>
+        </select>
+      </div>
+      <div className="grid grid-cols-1 gap-4">
         {filteredEvents.map((event) => (
-          <div key={event.id} className="bg-blue-200 text-blue-900 p-2 rounded-lg">
-            <p>{event.title}</p>
-            <p>{event.date}</p>
+          <div key={event.id} className="bg-gray-100 text-gray-800 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <p className="font-semibold">{event.title}</p>
+            <p className="text-sm">{event.date}</p>
           </div>
         ))}
       </div>
